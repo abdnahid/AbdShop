@@ -1,19 +1,20 @@
-import React,{useState,useEffect} from 'react';
-import axios from 'axios';
+import React,{useEffect} from 'react';
+import {useDispatch,useSelector} from 'react-redux';
 import ProductCard from '../Products/ProductCard';
+import { fetchProducts } from '../../actions/productListActions';
+import Loading from '../layout/Loading';
+import Message from '../layout/Message';
 
 const Home = () => {
-  const [products,setProducts]=useState([]);
+  const dispatch = useDispatch();
+  const productsListState = useSelector((state)=>state.productList)
+  const {products,loading,error}=productsListState
   useEffect(()=>{
-    const findProducts = async()=>{
-      const res= await axios.get("/api/products");
-      setProducts(res.data);
-    }
-    findProducts();
+    dispatch(fetchProducts())
   },[])
   return (
-      <div className="row">
-          {products.map((product)=><ProductCard product={product} key={product._id}/>)}
+      <div className="row justify-content-center">
+          {loading?<Loading />:error?<Message type="danger" message={error}/>:(products.map((product)=><ProductCard product={product} key={product._id}/>))}
       </div>
   )
 };

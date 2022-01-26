@@ -11,8 +11,57 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* warning */
+.wrapper .wrappercard {
+  background-color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.wrapper .wrappercard .wrappersubject p {
+  color: #909092;
+}
+.wrapper .wrappercard .wrappersubject {
+  width: 90%;
+  text-align: center;
+}
+.wrapper .wrappercard .wrappericon {
+  font-size: 28px;
+  width: 5%;
+}
+.wrapper-warning .wrappercard .wrappericon {
+  color: #fdc220;
+}
+.wrapper-success .wrappercard .wrappericon {
+  color: #43d761;
+}
+.wrapper-danger .wrappercard .wrappericon {
+  color: #ee3022;
+}
+.wrapper-warning .wrappercard {
+  border-left: 5px solid #fdc220;
+}
+.wrapper-success .wrappercard {
+  border-left: 5px solid #43d761;
+}
+.wrapper-danger .wrappercard {
+  border-left: 5px solid #ee3022;
+}
+.wrapper .wrappercard .wrappericon-times {
+  font-size: 28px;
+  color: #c3c2c7;
+  cursor: pointer;
+  width: 5%;
+}
+/* warning */
 .section-padding {
   padding: 50px 0;
+}
+.home-loader-size {
+  height: 100px;
 }
 .review-rating {
   margin-left: 10px;
