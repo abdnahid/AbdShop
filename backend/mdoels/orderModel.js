@@ -8,7 +8,7 @@ const OrderSchema = mongoose.Schema({
     },
     orderItems:[{
         name:{
-            type:mongoose.Schema.Types.ObjectId,
+            type:String,
             required:true,
         },
         qty:{
@@ -23,30 +23,18 @@ const OrderSchema = mongoose.Schema({
             type:Number,
             required:true
         },
-        product:{
+        productId:{
             type:mongoose.Schema.Types.ObjectId,
             required:true,
             ref:'Product'
         }
     }],
-    email:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    password:{
-        type:String,
-        required:true
-    },
-    isAdmin:{
-        type:Boolean,
-        required:true,
-        default:false
-    },
     shippingAddress:{
+        name:{type:String,required:true},
+        email:{type:String,required:true},
+        phone:{type:String,required:true},
         address:{type:String,required:true},
-        city:{type:String,required:true},
-        postalCode:{type:String,required:true},
+        zip:{type:String,required:true},
         country:{type:String,required:true}
     },
     paymentMethod:{
@@ -82,7 +70,7 @@ const OrderSchema = mongoose.Schema({
     paidAt:{
         type:Date
     },
-    isDeliverd:{
+    isDelivered:{
         type:Boolean,
         required:true,
         default:false

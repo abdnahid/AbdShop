@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS , FETCH_PRODUCT, FETCH_ERROR, SET_LOADING } from "../actions/types";
+import { FETCH_PRODUCTS , FETCH_PRODUCT, FETCH_ERROR, PRODUCT_REQUEST } from "../actions/types";
 
 const initialState={
     products:[],
@@ -9,7 +9,7 @@ const initialState={
 
 export const productListReducer = (state=initialState,action)=>{
     switch (action.type) {
-        case SET_LOADING :
+        case PRODUCT_REQUEST :
             return {...state,loading:true}
         case FETCH_PRODUCTS:
             return {...state,products:action.payload,loading:false,currentProduct:{},error:null}

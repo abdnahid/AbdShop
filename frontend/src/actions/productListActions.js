@@ -1,9 +1,9 @@
 import axios from "axios"
-import { FETCH_ERROR, FETCH_PRODUCTS, SET_LOADING,FETCH_PRODUCT } from "./types"
+import { FETCH_ERROR, FETCH_PRODUCTS, FETCH_PRODUCT, PRODUCT_REQUEST } from "./types"
 
 export const fetchProducts=()=>async(dispatch)=>{
     try {
-        dispatch({type:SET_LOADING});
+        dispatch({type:PRODUCT_REQUEST});
         const {data}=await axios.get('/api/products');
         dispatch({type:FETCH_PRODUCTS,payload:data})
     } catch (error) {
@@ -12,7 +12,7 @@ export const fetchProducts=()=>async(dispatch)=>{
 }
 export const fetchProduct=(id)=>async(dispatch)=>{
     try {
-        dispatch({type:SET_LOADING});
+        dispatch({type:PRODUCT_REQUEST});
         const {data}=await axios.get(`/api/products/${id}`);
         dispatch({type:FETCH_PRODUCT,payload:data})
     } catch (error) {

@@ -13,9 +13,13 @@ const Home = () => {
     dispatch(fetchProducts())
   },[])
   return (
-      <div className="row justify-content-center">
-          {loading?<Loading />:error?<Message type="danger" message={error}/>:(products.map((product)=><ProductCard product={product} key={product._id}/>))}
+    <div className="section-padding">
+      <div className="container">
+        <div className="row justify-content-center">
+            {loading?<Loading />:error?<Message type="danger" message={error}/>:(products.map((product)=><ProductCard product={product} key={product._id}/>))}
+        </div>
       </div>
+    </div>
   )
 };
 
