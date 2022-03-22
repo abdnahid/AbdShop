@@ -7,6 +7,8 @@ import { BrowserRouter as Router,Route,Routes } from 'react-router-dom';
 import UserProfile from "./components/pages/UserProfile";
 import LoginRegister from "./components/pages/LoginRegister";
 import Checkout from "./components/pages/Checkout";
+import Order from "./components/pages/Order";
+import UserList from "./components/pages/UserList";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
               <Route exact path='/cart' element={<CartPage />} />
               <Route exact path='/profile' element={<UserProfile />} />
               <Route exact path='/shipping' element={<Checkout/>}/>
+              <Route exact path='/order/:id' element={<Order/>}/>
+              <Route exact path='/admin/userlist' element={<UserList/>}/>
             </Routes>
         <Footer />
       </div>

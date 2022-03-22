@@ -12,7 +12,11 @@ import {
     USER_DETAILS_ERROR, 
     USER_UPDATE_REQUEST,
     USER_UPDATE_SUCCESS,
-    USER_UPDATE_ERROR} from "./types";
+    USER_UPDATE_ERROR,
+    USER_LIST_SUCCESS,
+    USER_LIST_REQUEST,
+    USER_LIST_ERROR,
+    ALL_ORDERS_RESET} from "./types";
 
 export const login=(email,password)=>async(dispatch)=>{
     dispatch({type:LOGIN_REQUEST});
@@ -83,7 +87,7 @@ export const userUpdate=(updatedUser)=>async(dispatch,getState)=>{
                 Authorization:`Bearer ${userInfo.token}`
             }
         }
-        const {data} = await axios.put('/api/users/profile',updatedUser,config)
+        const {data} = await axios.put('/api/users/profile',updatedUser,config);
 
         dispatch({
             type:USER_UPDATE_SUCCESS,
@@ -104,5 +108,28 @@ export const userUpdate=(updatedUser)=>async(dispatch,getState)=>{
 
 export const logout=()=>(dispatch)=>{
     localStorage.removeItem('userData');
-    dispatch({type:LOGOUT})
+    dispatch({type:LOGOUT});
+    dispatch({type:ALL_ORDERS_RESET});
+}
+
+//user actions for admins
+
+export const userLists=()=>async(dispatch,getState)=>{
+    try {
+        dispatch({type:USER_LIST_REQUEST});
+        const {userLogin:{userInfo}}=getState();
+        const config = {
+            headers:{
+                Authorization:`Bearer ${userInfo.token}`
+            }
+        }
+        const {data} = await axios.get('/api/users',config);
+
+        dispatch({
+            type:USER_LIST_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({type:USER_LIST_ERROR,payload:error.response && error.response.data.msg ? error.response.data.msg : error.msg})
+    }
 }

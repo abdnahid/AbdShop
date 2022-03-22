@@ -19,13 +19,13 @@ const Checkout = () => {
     const [email,setEmail]=useState(shippingState.email);
     const [phone,setPhone]=useState(shippingState.phone);
     const [address,setAddress]=useState(shippingState.address);
-    const [zip,setZip]=useState(shippingState.zip);
+    const [zip,setZip]=useState("");
     const [country,setCountry]=useState(shippingState.country);
     const [paymentMethod,setPaymentMethod]=useState("paypal");
     const [promo,setPromo]=useState("");
     const countryOptions = useMemo(() => countryList().getData(), []);
-    const orderState = useSelector(state=>state.order)
-    const {order,success,error}=orderState
+    const orderCreateState = useSelector(state=>state.orderCreate)
+    const {order,success,error}=orderCreateState
     useEffect(()=>{
         if (!loginState) {
             navigate("/");
@@ -43,8 +43,8 @@ const Checkout = () => {
     cartItemsState.taxPrice = (cartItemsState.cartTotalPrice*0.05).toFixed(2);
     const {type,value}=promoState
     const promoValue = type && type==="percentage"?(cartItemsState.cartTotalPrice*(value/100)).toFixed(2):type&&type==="flat"?value:0;
-    const finalTotal = (Number(cartItemsState.cartTotalPrice)+Number(cartItemsState.shippingPrice)+Number(cartItemsState.taxPrice)-Number(promoValue)).toFixed(2)
-    console.log(finalTotal)
+    const finalTotal = (Number(cartItemsState.cartTotalPrice)+Number(cartItemsState.shippingPrice)+Number(cartItemsState.taxPrice)-Number(promoValue)).toFixed(2);
+    const today = new Date();
     const handleSubmit = (e)=>{
         e.preventDefault();
         dispatch(saveShipping({name,email,phone,address,zip,country}))
@@ -54,7 +54,8 @@ const Checkout = () => {
             taxPrice:cartItemsState.taxPrice,
             shippingPrice:cartItemsState.shippingPrice,
             totalPrice:finalTotal,
-            paymentMethod
+            paymentMethod,
+            placedAt:today
         }))
     }
     const handlePromo=(e)=>{
@@ -162,7 +163,7 @@ const Checkout = () => {
                         <div className="row">
                         <div className="col-md-6 mb-3">
                             <label htmlFor="country">Country</label>
-                            <Select className="custom-select d-block w-100" id="country" required options={countryOptions} onChange={(value)=>setCountry(value.label)}/>
+                            <Select className="custom-select d-block w-100" id="country" required value={country} options={countryOptions} onChange={(value)=>setCountry(value.label)}/>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="zip">Zip</label>

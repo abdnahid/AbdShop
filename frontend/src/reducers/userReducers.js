@@ -10,7 +10,10 @@ import {
     USER_DETAILS_ERROR,
     USER_UPDATE_REQUEST,
     USER_UPDATE_SUCCESS,
-    USER_UPDATE_ERROR } from "../actions/types";
+    USER_UPDATE_ERROR, 
+    USER_LIST_REQUEST,
+    USER_LIST_SUCCESS,
+    USER_LIST_ERROR} from "../actions/types";
 
 const initialState = {
     loading:false,
@@ -63,7 +66,19 @@ export const userUpdateReducer=(state={},action)=>{
         case USER_UPDATE_SUCCESS:
             return {...state,userInfo:action.payload,loading:false}
         case USER_UPDATE_ERROR:
-            return {...state,error:action.payload}
+            return {...state,error:action.payload,loading:false}
+        default:
+            return state
+    }
+}
+export const userListReducer=(state={users:[]},action)=>{
+    switch (action.type) {
+        case USER_LIST_REQUEST:
+            return {...state,loading:true}
+        case USER_LIST_SUCCESS:
+            return {...state,users:action.payload,loading:false}
+        case USER_LIST_ERROR:
+            return {...state,error:action.payload,loading:false}
         default:
             return state
     }

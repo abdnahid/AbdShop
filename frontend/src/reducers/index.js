@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import { productListReducer } from "./productListReducer";
 import { cartReducer } from "./cartReducer";
-import { userDetailsReducer, userLoginReducer, userRegisterReducer, userUpdateReducer } from "./userReducers";
+import { userDetailsReducer, userListReducer, userLoginReducer, userRegisterReducer, userUpdateReducer } from "./userReducers";
 import { loginModalReducer } from "./loginModalReducer";
 import { promoReducer } from "./promoReducer";
-import { orderReducer } from "./orderReducers";
+import { myOrdersReducer, orderCreateReducer,orderDetailsReducer, orderPayReducer } from "./orderReducers";
 
 export default combineReducers({
     productList:productListReducer,
@@ -15,5 +15,9 @@ export default combineReducers({
     userUpdate:userUpdateReducer,
     loginModal:loginModalReducer,
     promo:promoReducer,
-    order:orderReducer
+    orderCreate:orderCreateReducer,
+    orderDetails:orderDetailsReducer,
+    orderPay:orderPayReducer,
+    myOrders:myOrdersReducer,
+    userList:userListReducer
 })

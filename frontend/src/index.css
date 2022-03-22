@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;600;700&display=swap');
 :root {
   --theme: #8efbe2;
   --theme2: #fbb72c;
@@ -38,6 +39,8 @@ p svg {
 
 p {
   margin: 0 !important;
+  font-size: 16px !important;
+  font-family: 'Rubik', sans-serif;
 }
 button {
   padding: 0;
@@ -383,4 +386,80 @@ div.empty-cart * {
 
 .product-links a:hover {
   color: #fbb72c;
+}
+
+/* My Orders page */
+
+section.my-orders {
+  padding: 100px 0;
+  box-sizing: border-box;
+  min-height: 88vh;
+}
+
+section.my-orders .row {
+  margin: 0 !important;
+}
+
+section.my-orders .heading {
+  padding: 20px 10px;
+}
+
+section.my-orders .order-body {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 10px;
+}
+
+section.my-orders .order-body .heading,
+section.my-orders .order-body .order-list,
+section.my-orders .order-body .footing {
+  padding: 40px 50px;
+}
+
+section.my-orders .order-body .strong {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+section.my-orders .order-body .btn-effect {
+  background-color: #f3f3f3;
+  border-radius: 30px;
+  padding: 15px;
+}
+section.my-orders .order-body .order-item-border {
+  border-top: 1px solid rgb(173 173 173 / 27%);
+}
+
+section.my-orders .order-body button.custom-theme-button {
+  background: #ff7800;
+  padding: 15px 40px;
+  border-radius: 30px;
+  box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+section.my-orders .order-body .qty-price {
+  font-size: 20px;
+}
+
+section.my-orders .order-body .qty-price > * {
+  margin-right: 20px;
+}
+section.my-orders .footing .order-total {
+  font-size: 30px;
+  font-weight: 600;
+  color: #ff7800;
+}
+
+section.my-orders .footing .cancel-order {
+  border-right: 1px solid rgb(173 173 173 / 27%);
+}
+
+.card-body img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 40px;
 }

@@ -11,7 +11,6 @@ const authorization = asyncHandler(async(req,res,next)=>{
             req.authorizedUser = await User.findById(decoded.id).select("-password");
             next();
         } catch (err) {
-            console.log(err.message);
             res.status(401).json({msg:"User is not authorized"});
         }
     }else{
@@ -19,5 +18,14 @@ const authorization = asyncHandler(async(req,res,next)=>{
         throw new Error('Not authorized, No token or token is invalid')
     }
 })
+export const adminAuth = asyncHandler(async(req,res,next)=>{
 
-export default authorization;
+    if (req.authorizedUser && req.authorizedUser.isAdmin) {
+        next();
+    }else{
+        res.status(401);
+        throw new Error('Not authorized, Only Admin can access this.')
+    }
+})
+
+export default authorization
