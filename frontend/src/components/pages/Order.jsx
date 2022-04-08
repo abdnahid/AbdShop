@@ -53,7 +53,7 @@ const Order = () => {
                 <Loading /> : error ?
                 <Message type="danger" message={error}/> : (
                   <>
-                    <h2>My Orders</h2>
+                    <h2>Order Details</h2>
                     <p className="py-3">View and Edit all your pending, delivered and returned orders here</p>
                     <p className="py-2"><span className='fw-bold'>Name:</span> {orderList.shippingAddress.name}</p>
                     <p className="py-2"><span className='fw-bold'>Email:</span> <a href={`mailto:${orderList.shippingAddress.email}`}>{orderList.shippingAddress.email}</a></p>

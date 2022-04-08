@@ -9,6 +9,10 @@ import LoginRegister from "./components/pages/LoginRegister";
 import Checkout from "./components/pages/Checkout";
 import Order from "./components/pages/Order";
 import UserList from "./components/pages/UserList";
+import UserEditAdmin from "./components/pages/UserEditAdmin";
+import ProductList from "./components/pages/ProductList";
+import ProductEditAdmin from "./components/pages/ProductEditAdmin";
+import OrderListAdmin from "./components/pages/OrderListAdmin";
 
 function App() {
   return (
@@ -25,6 +29,10 @@ function App() {
               <Route exact path='/shipping' element={<Checkout/>}/>
               <Route exact path='/order/:id' element={<Order/>}/>
               <Route exact path='/admin/userlist' element={<UserList/>}/>
+              <Route exact path='/admin/productList' element={<ProductList/>}/>
+              <Route exact path='/admin/orderList' element={<OrderListAdmin/>}/>
+              <Route exact path='/admin/user/:id' element={<UserEditAdmin/>}/>
+              <Route exact path='/admin/products/:id' element={<ProductEditAdmin/>}/>
             </Routes>
         <Footer />
       </div>

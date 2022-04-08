@@ -7,6 +7,7 @@ import Order from "../mdoels/orderModel.js";
 // @route POST api/orders
 // @access private
 export const addOrder = asyncHandler(async(req,res)=>{
+    console.log(req.body)
     try {
         const {
             orderItems,
@@ -71,6 +72,13 @@ export const getMyOrders = asyncHandler(async(req,res)=>{
     const orders = await Order.find({user:req.authorizedUser._id})
     res.status(201).json(orders);
 })
+// @desc get all orders
+// @route GET api/orders/
+// @access private/admin
+export const getAllOrders = asyncHandler(async(req,res)=>{
+    const orders = await Order.find({}).populate("user","_id name");
+    res.status(201).json(orders);
+})
 // @desc update order payment status
 // @route PUT api/orders/:id/pay
 // @access private
@@ -90,6 +98,31 @@ export const payOrder = asyncHandler(async(req,res)=>{
             }
             const updatedOrder = await order.save();
             res.json(updatedOrder);
+        }else{
+            res.status(404);
+            throw new Error("Order is not found")
+        }
+    } catch (error) {
+        res.status(500).json(error.message);
+        console.error(error.message);
+    }
+    
+})
+// @desc update order delivered status
+// @route PUT api/orders/:id/deliver
+// @access private/admin
+export const deliverOrder = asyncHandler(async(req,res)=>{
+    const orderId = req.params.id;
+    console.log(orderId)
+    const {delivered}=req.body;
+    try {
+        const order = await Order.findById(orderId)
+        if (order) {
+            order.isDelivered = delivered;
+            order.deliveredAt = Date.now();
+            await order.save();
+            const updatedOrdersList = await Order.find({});
+            res.json(updatedOrdersList);
         }else{
             res.status(404);
             throw new Error("Order is not found")

@@ -25,14 +25,14 @@ const CartPage = () => {
     return (
         <>
             {cartItemsState.length>0 ? (
-                <div className="section-padding">
+                <div className="section-padding cart-page">
                     <div className="container cart_wrapper">
                         <OrderSteps step1/>
                         <div className="cart_lists">
                             <div className="cart_title">
-                                <p>
-                                    <i className="fas fa-store"/>Your Shopping Cart
-                                </p>
+                                <h3>
+                                    <i className="fas fa-store"/> Your Shopping Cart
+                                </h3>
                             </div>
                             <div className="cart_list_wrap">
                                 <div className="cart_responsive">
@@ -43,10 +43,10 @@ const CartPage = () => {
                                             </div>
                                             <div className="td_item item_name col-6">
                                                 <Link to={`/product/${item.productId}`}>
-                                                    <label className="main">{item.name}</label>
+                                                    <h5 className="main">{item.name}</h5>
                                                 </Link>
                                             </div>
-                                            <div className="wrap td-item col-2">
+                                            <div className="wrap td_item col-2">
                                                 <div className="numbers">
                                                     <button 
                                                         className="minus" 
@@ -65,7 +65,6 @@ const CartPage = () => {
                                                     </button>
                                                 </div>
                                             </div>
-
                                             <div className="td_item item_price col-2">
                                                 <label>$ {(item.price*item.qty).toFixed(2)}</label>
                                             </div>
@@ -79,14 +78,14 @@ const CartPage = () => {
                                 </div>
                                 <div className="cart-footer row">
                                     <div className="col-3">
-                                        <Link to="/" className='btn btn-back'>
+                                        <Link to="/" className='btn btn-back custom-outline-button'>
                                             <p>
                                                 <i className="fas fa-hand-point-left" />Back to Shop
                                             </p>
                                         </Link>
                                     </div>
                                     <div className="cart_details d-grid col-4">
-                                        <button className="btn btn-theme" onClick={()=>loginState?navigate('/shipping'):dispatch(openModal())}>Checkout</button>
+                                        <button className="btn custom-theme-button" onClick={()=>loginState?navigate('/shipping'):dispatch(openModal())}>Checkout</button>
                                     </div>
                                     <div className="col-2 cart-total-title">
                                         <label>Subtotal: </label>

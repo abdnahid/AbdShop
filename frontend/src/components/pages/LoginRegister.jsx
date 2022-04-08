@@ -19,11 +19,13 @@ const LoginRegister = () => {
   const [style,setStyle]=useState({
     loginParams:{
       visibility:'block',
-      background:'var(--theme)'
+      background:'var(--theme)',
+      color:'#fff'
     },
     registerParams:{
       visibility:'none',
-      background:'#fff'
+      background:'#fff',
+      color:'#000'
     }
   });
   useEffect(()=>{
@@ -33,15 +35,15 @@ const LoginRegister = () => {
   const handleLoginShow=()=> {
     setStyle({
       ...style,
-      loginParams:{visibility:'block',background:'var(--theme)'},
-      registerParams:{visibility:'none',background:'#fff'}
+      loginParams:{visibility:'block',background:'var(--theme)',color:'#fff'},
+      registerParams:{visibility:'none',background:'#fff',color:'#000'}
     });
   }
   const handleRegisterShow=()=> {
     setStyle({
       ...style,
-      registerParams:{visibility:'block',background:'var(--theme)'},
-      loginParams:{visibility:'none',background:'#fff'}
+      registerParams:{visibility:'block',background:'var(--theme)',color:'#fff'},
+      loginParams:{visibility:'none',background:'#fff',color:'#000'}
     });
   }
   const handleLoginSubmit = (e)=>{
@@ -63,10 +65,10 @@ const LoginRegister = () => {
         <div className="login-modal" id="loginRegisterModal">
           <div className="flexbox">
             <div className="column-50">
-              <button className="block login-button" onClick={handleLoginShow} style={{backgroundColor:style.loginParams.background}}>Sign In</button>
+              <button className="block login-button" onClick={handleLoginShow} style={{backgroundColor:style.loginParams.background,color:style.loginParams.color}}>Sign In</button>
             </div>
             <div className="column-50">
-              <button className="block register-button" onClick={handleRegisterShow} style={{backgroundColor:style.registerParams.background}}>Register</button>
+              <button className="block register-button" onClick={handleRegisterShow} style={{backgroundColor:style.registerParams.background,color:style.registerParams.color}}>Register</button>
             </div>
             <div className="login-register-body">
               {loginState.error ? 
@@ -133,9 +135,7 @@ const LoginRegister = () => {
                     <input id="registerPassword" type={passwordView?'text':'password'} placeholder="Enter Account Password" value={inputPassword} onChange={(e)=>setInputPassword(e.target.value)} />
                   </div>
                   <div className="input-toggle-password column-10" onClick={()=>passwordView?setPasswordView(false):setPasswordView(true)}>
-                    <button>
                       <i className="fas fa-eye-slash" />
-                    </button>
                   </div>
                 </div>
                 <div className="button-submit">

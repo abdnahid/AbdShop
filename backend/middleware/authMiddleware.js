@@ -3,7 +3,6 @@ import asyncHandler from "express-async-handler";
 import User from "../mdoels/userModel.js";
 
 const authorization = asyncHandler(async(req,res,next)=>{
-
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
         try {
             let token = req.headers.authorization.split(" ")[1];

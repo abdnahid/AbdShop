@@ -12,6 +12,11 @@ const reviewsSchema = mongoose.Schema({
     comment:{
         type:String,
         required:true,
+    },
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:'User'
     }
 },{
     timestamps:true
@@ -45,7 +50,6 @@ const ProductSchema = mongoose.Schema({
     },
     rating:{
         type:Number,
-        required:true,
         default:0
     },
     price:{

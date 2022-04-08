@@ -27,7 +27,7 @@ const UserProfile = () => {
         }else{
             dispatch(getMyOrders());
             if (!user.name) {
-                dispatch(userDetails());
+                dispatch(userDetails(userInfo._id));
             }else{
                 setInputName(user.name);
                 setInputEmail(user.email);
@@ -47,7 +47,7 @@ const UserProfile = () => {
                         <div className="card-body">
                             <img src="https://images.unsplash.com/photo-1457449940276-e8deed18bfff" alt="profile" className='img-fluid profile-photo'/>
                             <h4 className="card-title py-2"><i className="fa-solid fa-user" /><span className="mx-2">{user.name}</span></h4>
-                            <h4 className="card-text text-info"><i className="fa-solid fa-envelope" /><span className="mx-2">{user.email}</span></h4>
+                            <h4 className="card-text" style={{color:'var(--theme)'}}><i className="fa-solid fa-envelope" /><span className="mx-2">{user.email}</span></h4>
                         </div>
                     </div>
                     <div className="col-md-6 py-20">

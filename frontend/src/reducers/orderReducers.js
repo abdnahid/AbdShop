@@ -9,10 +9,14 @@ import {
     ORDER_PAY_SUCCESS,
     ORDER_PAY_ERROR,
     ORDER_PAY_RESET,
-    ALL_ORDERS_SUCCESS,
-    ALL_ORDERS_REQUEST,
-    ALL_ORDERS_ERROR,
-    ALL_ORDERS_RESET
+    USER_ALL_ORDERS_SUCCESS,
+    USER_ALL_ORDERS_REQUEST,
+    USER_ALL_ORDERS_ERROR,
+    USER_ALL_ORDERS_RESET,
+    ADMIN_ALL_ORDERS_SUCCESS,
+    ADMIN_ALL_ORDERS_REQUEST,
+    ADMIN_ALL_ORDERS_ERROR,
+    ADMIN_ALL_ORDERS_RESET
 } from "../actions/types";
 
 
@@ -42,14 +46,28 @@ export const orderDetailsReducer = (state={loading:true,orderList:[],error:null}
 }
 export const myOrdersReducer = (state={loading:true,myOrders:[],error:null},action)=>{
     switch (action.type) {
-        case ALL_ORDERS_REQUEST :
+        case USER_ALL_ORDERS_REQUEST :
             return {...state,loading:true}
-        case ALL_ORDERS_SUCCESS:
+        case USER_ALL_ORDERS_SUCCESS:
             return {...state,myOrders:action.payload,loading:false}
-        case ALL_ORDERS_ERROR:
+        case USER_ALL_ORDERS_ERROR:
             return {...state,error:action.payload,loading:false}
-        case ALL_ORDERS_RESET:
+        case USER_ALL_ORDERS_RESET:
             return {loading:true,myOrders:[],error:null}
+        default:
+            return state
+    }
+}
+export const adminOrdersReducer = (state={loading:true,adminOrders:[],error:null},action)=>{
+    switch (action.type) {
+        case ADMIN_ALL_ORDERS_REQUEST :
+            return {...state,loading:true}
+        case ADMIN_ALL_ORDERS_SUCCESS:
+            return {...state,adminOrders:action.payload,loading:false}
+        case ADMIN_ALL_ORDERS_ERROR:
+            return {...state,error:action.payload,loading:false}
+        case ADMIN_ALL_ORDERS_RESET:
+            return {loading:true,adminOrders:[],error:null}
         default:
             return state
     }

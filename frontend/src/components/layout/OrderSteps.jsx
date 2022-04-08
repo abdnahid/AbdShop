@@ -9,7 +9,13 @@ const OrderSteps = ({step1,step2,step3}) => {
                 <Link className={`nav-link text-dark ${step1?"active":""}`} to="/cart">Cart</Link>
             </li>
             <li className="nav-item">
+                <i className="fa-solid fa-arrow-right" />
+            </li>
+            <li className="nav-item">
                 <Link className={`nav-link text-dark ${step2?"active":""}`} to="/shipping">Checkout</Link>
+            </li>
+            <li className="nav-item">
+            <i className="fa-solid fa-arrow-right" />
             </li>
             <li className="nav-item">
                 <Link className={`nav-link text-dark ${step3?"active":""}`} to="/payment">Payment</Link>

@@ -176,7 +176,7 @@ const Checkout = () => {
                             <label className="custom-control-label mx-2" htmlFor="agreement">I agree to shipping and return policy</label>
                         </div>
                         <div className="d-grid">
-                            <button className="btn btn-primary btn-block" type="submit">Place order</button>
+                            <button className="btn custom-theme-button btn-block" type="submit">Place order</button>
                         </div>
                     </form>
                 </div>
