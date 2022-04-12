@@ -14,12 +14,15 @@ import {
     PRODUCT_UPDATE_SUCCESS,
     PRODUCT_UPDATE_ERROR,
     PRODUCT_UPDATE_REQUEST,
-    PRODUCT_UPDATE_RESET} from "./types"
+    PRODUCT_UPDATE_RESET,
+    REVIEW_CREATE_REQUEST,
+    REVIEW_CREATE_SUCCESS,
+    REVIEW_CREATE_ERROR} from "./types"
 
-export const fetchProducts=()=>async(dispatch)=>{
+export const fetchProducts=(keyword="",pageNumber="")=>async(dispatch)=>{
     try {
         dispatch({type:PRODUCT_REQUEST});
-        const {data}=await axios.get('/api/products');
+        const {data}=await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`);
         dispatch({type:FETCH_PRODUCTS,payload:data})
     } catch (error) {
         dispatch({type:FETCH_ERROR,payload:error.response && error.response.data.msg ? error.response.data.msg : error.msg})
@@ -98,5 +101,24 @@ export const productUpdate=(updatedProduct)=>async(dispatch,getState)=>{
         }, 2000);
     } catch (error) {
         dispatch({type:PRODUCT_UPDATE_ERROR,payload:error.response && error.response.data.msg ? error.response.data.msg : error.msg})
+    }
+}
+
+
+export const createReview=(id,review)=>async(dispatch,getState)=>{
+    try {
+        dispatch({type:REVIEW_CREATE_REQUEST});
+        const {userLogin:{userInfo}}=getState();
+        const config = {
+            headers:{
+                Authorization:`Bearer ${userInfo.token}`
+            }
+        }
+        await axios.post(`/api/products/${id}/reviews`,review,config);
+        dispatch({
+            type:REVIEW_CREATE_SUCCESS,
+        })
+    } catch (error) {
+        dispatch({type:REVIEW_CREATE_ERROR,payload:error.response && error.response.data.msg ? error.response.data.msg : error.msg})
     }
 }

@@ -4,6 +4,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import { logout } from '../../actions/userActions';
 import { openModal } from '../../actions/modalActions';
 import Logo from './logo.jpeg';
+import SearchBox from './SearchBox';
 
 const Header = () => {
   const loginState = useSelector((state)=>state.userLogin.userInfo);
@@ -70,6 +71,7 @@ const Header = () => {
                     </button>
                   </li>)}
             </ul>
+            <SearchBox />
           </div>
         </div>
       </nav>

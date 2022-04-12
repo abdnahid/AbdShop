@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import Loading from '../layout/Loading';
 import Message from '../layout/Message';
@@ -7,9 +7,11 @@ import { fetchProducts, productCreate, productDelete } from '../../actions/produ
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PRODUCT_CREATE_RESET } from '../../actions/types';
+import Paginate from '../layout/Paginate';
 
 
 const ProductList = () => {
+    const {pageNumber} = useParams()
     const dispatch = useDispatch();
     const navigate= useNavigate();
     const loginState = useSelector((state)=>state.userLogin);
@@ -22,25 +24,25 @@ const ProductList = () => {
         if (!userInfo || !userInfo.isAdmin) {
             navigate("/");
         }else{
-            dispatch(fetchProducts());
+            dispatch(fetchProducts("",pageNumber));
         }
         //eslint-disable-next-line
-    },[userInfo]);
+    },[userInfo,pageNumber]);
     useEffect(()=>{
         dispatch({type:PRODUCT_CREATE_RESET})
         if (message) {
             toast.success(message);
+            dispatch(fetchProducts());
         }else if (product) {
             navigate(`/admin/products/${product._id}`);
         }
         //eslint-disable-next-line
     },[message,product]);
     const productListState = useSelector((state)=>state.productList);
-    const {loading,products,error} = productListState;
+    const {loading,products,error,pages,page} = productListState;
     const handleDelete=(id)=>{
         if (window.confirm('Are you sure?')) {
         dispatch(productDelete(id));
-        dispatch(fetchProducts());
         }
     }
     const handleCreate=()=>{
@@ -98,6 +100,7 @@ const ProductList = () => {
                                 ))}
                             </tbody>
                         </table>
+                        <Paginate pages={pages} page={page} isAdmin={true} keyword=""/>
                     </div>
                 </>
                 )}

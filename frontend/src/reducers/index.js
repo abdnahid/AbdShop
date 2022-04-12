@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { productCreateReducer, productDeleteReducer, productListReducer, productUpdateReducer } from "./productListReducer";
+import { productCreateReducer, productDeleteReducer, productListReducer, productUpdateReducer, reviewCreateReducer } from "./productListReducer";
 import { cartReducer } from "./cartReducer";
 import { userDeleteReducer, userDetailsReducer, userListReducer, userLoginReducer, userRegisterReducer, userUpdateReducer } from "./userReducers";
 import { loginModalReducer } from "./loginModalReducer";
@@ -24,5 +24,6 @@ export default combineReducers({
     userDelete:userDeleteReducer,
     productDelete:productDeleteReducer,
     productUpdate:productUpdateReducer,
-    productCreate:productCreateReducer
+    productCreate:productCreateReducer,
+    reviewCreate:reviewCreateReducer
 })

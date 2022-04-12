@@ -8,8 +8,18 @@ import mongoose from "mongoose";
 // @route GET api/products
 // @access public
 export const getAllProducts = asyncHandler(async(req,res)=>{
-    const products = await Product.find({});
-    res.json(products);
+    const keyword = req.query.keyword ? {
+        name:{
+            $regex:req.query.keyword,
+            $options: 'i'
+        }
+    } : {}
+    const page = Number(req.query.pageNumber) || 1
+    const pageSize = 10;
+    const count = await Product.countDocuments({...keyword})
+    const pages = Math.ceil(count/pageSize)
+    const products = await Product.find({...keyword}).limit(pageSize).skip(pageSize*(page -1));
+    res.json({products,page,pages});
 })
 
 // @desc fetch single product

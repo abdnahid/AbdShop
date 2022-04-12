@@ -22,6 +22,9 @@ function App() {
         <LoginRegister/>
             <Routes>
               <Route exact path='/' element={<Home />} />
+              <Route exact path='/search/:keyword' element={<Home />} />
+              <Route exact path='/page/:pageNumber' element={<Home />} />
+              <Route exact path='/search/:keyword/page/:pageNumber' element={<Home />} />
               <Route exact path='/product/:id' element={<ProductPage />} />
               <Route exact path='/cart/:id' element={<CartPage />} />
               <Route exact path='/cart' element={<CartPage />} />
@@ -30,6 +33,7 @@ function App() {
               <Route exact path='/order/:id' element={<Order/>}/>
               <Route exact path='/admin/userlist' element={<UserList/>}/>
               <Route exact path='/admin/productList' element={<ProductList/>}/>
+              <Route exact path='/admin/productList/page/:pageNumber' element={<ProductList/>}/>
               <Route exact path='/admin/orderList' element={<OrderListAdmin/>}/>
               <Route exact path='/admin/user/:id' element={<UserEditAdmin/>}/>
               <Route exact path='/admin/products/:id' element={<ProductEditAdmin/>}/>

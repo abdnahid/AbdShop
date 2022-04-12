@@ -1,10 +1,13 @@
 import React,{useState,useEffect} from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
+import WriteReview from '../layout/WriteReview';
 import {useDispatch,useSelector} from 'react-redux';
 import { fetchProduct } from '../../actions/productListActions';
 import Loading from '../layout/Loading';
 import Message from '../layout/Message';
+import ProductReview from '../layout/ProductReview';
+import Meta from '../layout/Meta';
 
 const ProductPage = () => {
     const { id } = useParams();
@@ -12,22 +15,27 @@ const ProductPage = () => {
     const productState = useSelector((state)=>state.productList);
     const dispatch = useDispatch();
     const {currentProduct,loading,error}=productState;
-    const {_id,name,image,description,brand,category,price,countInStock,rating,numReviews}=currentProduct;
+    const {name,image,description,brand,price,countInStock,rating,numReviews}=currentProduct;
     const navigate = useNavigate();
+    const loginState = useSelector((state)=>state.userLogin);
+    const {userInfo}=loginState;
+    const reviewState = useSelector((state)=>state.reviewCreate)
+    const {success}= reviewState;
     useEffect(()=>{
       dispatch(fetchProduct(id))
-    },[])
+    },[success]);
     const handleAddToCart=()=>{
       navigate(`/cart/${id}?qty=${qty}`)
     }
   return (
-    <div className='section-padding'>
-      <div className="container">
+    <section className='product-page'>
+      <div className="container my-50">
         <div className="row align-items-center">
             {loading?
               <Loading /> : error ?
               <Message type="danger" message={error}/> : (
               <>
+                <Meta title={name}/>
                 <div className="col-md-6">
                   <img src={image} alt={name} />
                 </div>
@@ -72,7 +80,17 @@ const ProductPage = () => {
               )}
         </div>
       </div>
-    </div>
+      <div className="container my-50">
+        <div className="row">
+          <div className="col-md-6">
+            {userInfo ? <WriteReview /> : <Message type="warning" message="Please Login to rate this product"/>}
+          </div>
+          <div className="col-md-6 product-reviews">
+            {currentProduct.reviews && currentProduct.reviews.map((review,index)=><ProductReview key={index+1} reviewDetails={review}/>)}
+          </div>
+        </div>
+      </div>
+    </section>
   )
 };
 

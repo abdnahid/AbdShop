@@ -14,7 +14,11 @@ import {
     PRODUCT_UPDATE_REQUEST,
     PRODUCT_UPDATE_SUCCESS,
     PRODUCT_UPDATE_ERROR,
-    PRODUCT_UPDATE_RESET
+    PRODUCT_UPDATE_RESET,
+    REVIEW_CREATE_REQUEST,
+    REVIEW_CREATE_SUCCESS,
+    REVIEW_CREATE_ERROR,
+    REVIEW_CREATE_RESET
 } from "../actions/types";
 
 const initialState={
@@ -29,7 +33,8 @@ export const productListReducer = (state=initialState,action)=>{
         case PRODUCT_REQUEST :
             return {...state,loading:true}
         case FETCH_PRODUCTS:
-            return {...state,products:action.payload,loading:false,currentProduct:{},error:null}
+            const {products,page,pages}=action.payload
+            return {...state,products,page,pages,loading:false,currentProduct:{},error:null}
         case FETCH_ERROR:
             return {...state,error:action.payload,loading:false}
         case FETCH_PRODUCT:
@@ -78,6 +83,22 @@ export const productUpdateReducer=(state={},action)=>{
         case PRODUCT_UPDATE_ERROR:
             return {error:action.payload,loading:false}
         case PRODUCT_UPDATE_RESET:
+            return {}
+        default:
+            return state
+    }
+}
+
+
+export const reviewCreateReducer=(state={},action)=>{
+    switch (action.type) {
+        case REVIEW_CREATE_REQUEST:
+            return {loading:true}
+        case REVIEW_CREATE_SUCCESS:
+            return {success:true,loading:false}
+        case REVIEW_CREATE_ERROR:
+            return {error:action.payload,loading:false}
+        case REVIEW_CREATE_RESET:
             return {}
         default:
             return state
