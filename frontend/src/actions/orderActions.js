@@ -14,7 +14,8 @@ import {
     USER_ALL_ORDERS_ERROR,
     ADMIN_ALL_ORDERS_REQUEST,
     ADMIN_ALL_ORDERS_SUCCESS,
-    ADMIN_ALL_ORDERS_ERROR
+    ADMIN_ALL_ORDERS_ERROR,
+    CART_RESET
 } from "./types";
 
 export const addOrder=(orderData)=>async(dispatch,getState)=>{
@@ -34,6 +35,10 @@ export const addOrder=(orderData)=>async(dispatch,getState)=>{
             type:ORDER_CREATE_SUCCESS,
             payload: data
         })
+        dispatch({
+            type:CART_RESET
+        })
+        localStorage.setItem('cartItems',JSON.stringify(getState().cartList.cartItems));
     } catch (error) {
         dispatch({type:ORDER_CREATE_ERROR,payload:error.response && error.response.data.msg ? error.response.data.msg : error.msg})
     }

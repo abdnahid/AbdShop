@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, SAVE_SHIPPING } from "../actions/types";
+import { ADD_TO_CART, REMOVE_FROM_CART, SAVE_SHIPPING,CART_RESET } from "../actions/types";
 
 
 
@@ -16,6 +16,8 @@ export const cartReducer=(state={},action)=>{
             return {...state,cartItems:state.cartItems.filter((item)=>item.productId !== action.payload)}
         case SAVE_SHIPPING:
             return {...state,shippingAddress:action.payload}
+        case CART_RESET:
+            return {...state,cartItems:[]}
         default:
             return state
     }

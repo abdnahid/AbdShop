@@ -82,11 +82,10 @@ const ProductPage = () => {
       </div>
       <div className="container my-50">
         <div className="row">
-          <div className="col-md-6">
-            {userInfo ? <WriteReview /> : <Message type="warning" message="Please Login to rate this product"/>}
-          </div>
-          <div className="col-md-6 product-reviews">
+          <h2>Product Reviews</h2>
+          <div className="col product-reviews">
             {currentProduct.reviews && currentProduct.reviews.map((review,index)=><ProductReview key={index+1} reviewDetails={review}/>)}
+            {userInfo ? <WriteReview /> : <Message type="warning" message="Please Login to rate this product" login={true}/>}
           </div>
         </div>
       </div>

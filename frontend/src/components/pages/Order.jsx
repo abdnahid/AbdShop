@@ -8,6 +8,7 @@ import Message from '../layout/Message';
 import { getOrderList, payOrderAction } from '../../actions/orderActions';
 import { ORDER_PAY_RESET } from '../../actions/types';
 import moment from "moment";
+import OrderSteps from '../layout/OrderSteps';
 
 
 const Order = () => {
@@ -53,6 +54,7 @@ const Order = () => {
                 <Loading /> : error ?
                 <Message type="danger" message={error}/> : (
                   <>
+                    <OrderSteps step1 step2 step3/>
                     <h2>Order Details</h2>
                     <p className="py-3">View and Edit all your pending, delivered and returned orders here</p>
                     <p className="py-2"><span className='fw-bold'>Name:</span> {orderList.shippingAddress.name}</p>

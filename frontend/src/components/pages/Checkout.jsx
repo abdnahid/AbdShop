@@ -64,12 +64,9 @@ const Checkout = () => {
     }
   return (
       <div className="section-padding">
-        <div className="container">
+        <div className="container checkout-wrapper">
             <OrderSteps step1 step2/>
-            <div className="py-5 text-center">
-                <h2>Checkout</h2>
-            </div>
-            <div className="row">
+            <div className="row checkout-info">
                 <div className="col-md-4 order-md-2 mb-4">
                     <h4 className="d-flex justify-content-between align-items-center mb-3">
                         <span className="text-muted">Order Summary</span>

@@ -29,11 +29,6 @@ const CartPage = () => {
                     <div className="container cart_wrapper">
                         <OrderSteps step1/>
                         <div className="cart_lists">
-                            <div className="cart_title">
-                                <h3>
-                                    <i className="fas fa-store"/> Your Shopping Cart
-                                </h3>
-                            </div>
                             <div className="cart_list_wrap">
                                 <div className="cart_responsive">
                                     {cartItemsState.length===0?(<h3>No items to show</h3>):cartItemsState.map((item,index)=>(
@@ -43,7 +38,7 @@ const CartPage = () => {
                                             </div>
                                             <div className="td_item item_name col-6">
                                                 <Link to={`/product/${item.productId}`}>
-                                                    <h5 className="main">{item.name}</h5>
+                                                    <h3 className="main">{item.name}</h3>
                                                 </Link>
                                             </div>
                                             <div className="wrap td_item col-2">
@@ -88,7 +83,7 @@ const CartPage = () => {
                                         <button className="btn custom-theme-button" onClick={()=>loginState?navigate('/shipping'):dispatch(openModal())}>Checkout</button>
                                     </div>
                                     <div className="col-2 cart-total-title">
-                                        <label>Subtotal: </label>
+                                        <label>Total: </label>
                                     </div>
                                     <div className="col-2 cart-total">
                                         $ {cartItemsState.reduce((acc,item)=>acc+item.qty*item.price,0).toFixed(2)}

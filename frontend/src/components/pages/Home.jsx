@@ -20,9 +20,9 @@ const Home = () => {
     dispatch(fetchProducts(keyword,pageNumber))
   },[dispatch,keyword,pageNumber])
   return (
-    <div>
+    <div className='home-section'>
       <Meta/>
-      <ProductCaro products={products}/>
+      {(!keyword && !pageNumber) && <ProductCaro products={products}/>}
       <div className="container">
         <div className="row justify-content-center">
             {loading?<Loading />:error?<Message type="danger" message={error}/>:(products.map((product)=><ProductCard product={product} key={product._id}/>))}
