@@ -1,12 +1,11 @@
 import React,{useEffect, useState,useMemo} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
-import Select from 'react-select';
-import countryList from 'react-select-country-list';
 import { saveShipping } from '../../actions/cartListActions';
 import OrderSteps from '../layout/OrderSteps';
 import { getPromo } from '../../actions/promoActions';
 import { addOrder } from '../../actions/orderActions';
+import SelectCountry from '../layout/SelectCountry';
 
 const Checkout = () => {
     const navigate = useNavigate();
@@ -23,9 +22,8 @@ const Checkout = () => {
     const [country,setCountry]=useState(shippingState.country);
     const [paymentMethod,setPaymentMethod]=useState("paypal");
     const [promo,setPromo]=useState("");
-    const countryOptions = useMemo(() => countryList().getData(), []);
     const orderCreateState = useSelector(state=>state.orderCreate)
-    const {order,success,error}=orderCreateState
+    const {order,success}=orderCreateState
     useEffect(()=>{
         if (!loginState) {
             navigate("/");
@@ -160,7 +158,7 @@ const Checkout = () => {
                         <div className="row">
                         <div className="col-md-6 mb-3">
                             <label htmlFor="country">Country</label>
-                            <Select className="custom-select d-block w-100" id="country" required value={country} options={countryOptions} onChange={(value)=>setCountry(value.label)}/>
+                            <SelectCountry onSelectCountry={()=>setCountry(country)}/>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="zip">Zip</label>

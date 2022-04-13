@@ -1,10 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { openModal } from '../../actions/modalActions';
 import { useDispatch } from 'react-redux';
 
 const Message = ({type,message,login}) => {
-  const navigate=useNavigate();
   const dispatch = useDispatch();
   return (
     <div className="row justify-content-center">
@@ -15,7 +13,6 @@ const Message = ({type,message,login}) => {
                   <h3>{message}</h3>
                   {login && <button className='btn custom-theme-button' onClick={()=>dispatch(openModal())}>Login</button>}
               </div>
-              {/* <div className="wrappericon-times" onClick={()=>dispatch(logout())}><i className="fas fa-times" /></div> */}
           </div>
       </div>
     </div>

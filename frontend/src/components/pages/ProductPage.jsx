@@ -23,6 +23,7 @@ const ProductPage = () => {
     const {success}= reviewState;
     useEffect(()=>{
       dispatch(fetchProduct(id))
+      //eslint-disable-next-line
     },[success]);
     const handleAddToCart=()=>{
       navigate(`/cart/${id}?qty=${qty}`)

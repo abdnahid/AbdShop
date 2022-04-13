@@ -7,11 +7,11 @@ const ProductCaro = ({products}) => {
     <>
         <div id="productCarousel" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-indicators">
-            {sortedProducts.map((item,index)=><button key={index} type="button" data-bs-target="#productCarousel" data-bs-slide-to={index} className={index===0&&"active"}/>)}
+            {sortedProducts.map((item,index)=><button key={index} type="button" data-bs-target="#productCarousel" data-bs-slide-to={index} className={index===0 ? "active" : ""}/>)}
         </div>
         <div className="carousel-inner">
             {sortedProducts.map((item,index)=>(
-                <div className={`carousel-item ${index===0&&"active"}`} key={index}>
+                <div className={`carousel-item ${index===0 ? "active":""}`} key={index}>
                     <Link to={`/product/${item._id}`}>
                         <img src={item.image} className="d-block" alt={item.name} />
                         <div className="carousel-caption d-none d-md-block">
